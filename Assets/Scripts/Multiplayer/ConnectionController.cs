@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 
 namespace PGGE
 {
@@ -17,8 +18,9 @@ namespace PGGE
             public GameObject mConnectionProgress;
             public GameObject mBtnJoinRoom;
             public GameObject mInpPlayerName;
+            public TextMeshProUGUI statusText;
 
-            bool isConnecting = false;
+            private bool isConnecting = false;
 
             void Awake()
             {
@@ -33,13 +35,16 @@ namespace PGGE
             void Start()
             {
                 mConnectionProgress.SetActive(false);
+                statusText.gameObject.SetActive(false);
             }
 
-            public void Connect()
+            public void Join()
             {
                 mBtnJoinRoom.SetActive(false);
                 mInpPlayerName.SetActive(false);
                 mConnectionProgress.SetActive(true);
+                statusText.gameObject.SetActive(true);
+                statusText.text = "Connecting...";
 
                 // we check if we are connected or not, we join if we are, 
                 // else we initiate the connection to the server.
@@ -70,6 +75,7 @@ namespace PGGE
             {
                 Debug.LogWarningFormat("OnDisconnected() was called by PUN with reason {0}", cause);
                 isConnecting = false;
+                statusText.text = "Disconnected:" + cause.ToString();
             }
 
             public override void OnJoinRandomFailed(short returnCode, string message)
@@ -97,6 +103,21 @@ namespace PGGE
                     Debug.Log("We load the default room for multiplayer");
                     PhotonNetwork.LoadLevel("MultiplayerMap00");
                 }
+            }
+
+            public void JoinRoom(string roomName)
+            {
+                statusText.gameObject.SetActive(true);
+                statusText.text = "Joining Room: " + roomName;
+
+                PhotonNetwork.JoinRoom(roomName);
+            }
+
+            public override void OnRoomListUpdate(List<RoomInfo> roomList)
+            {
+                base.OnRoomListUpdate(roomList);
+
+                LobbyController.Instance.UpdateRoomListUI(roomList);
             }
         }
     }
