@@ -116,8 +116,6 @@ namespace PGGE
             public override void OnRoomListUpdate(List<RoomInfo> roomList)
             {
                 base.OnRoomListUpdate(roomList);
-
-                LobbyController.Instance.UpdateRoomListUI(roomList);
             }
         }
     }
