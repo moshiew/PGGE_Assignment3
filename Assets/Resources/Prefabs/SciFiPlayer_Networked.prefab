@@ -889,20 +889,6 @@ MonoBehaviour:
   mRotationSpeed: 50
   mFollowCameraForward: 0
   mTurnRate: 500
-  audioSource: {fileID: 0}
-  metalClips: []
-  dirtClips: []
-  sandClips: []
-  jumpSfx: {fileID: 0}
-  groanSFX: {fileID: 0}
-  dancesfx: {fileID: 0}
-  deathSFX: {fileID: 0}
-  stepRate: 0.65
-  nextStepRate: 0.35
-  isMoving: 0
-  isDamaged: 0
-  isDancing: 0
-  speed: 0
   mGravity: -30
   mJumpHeight: 1
 --- !u!114 &2028064569042939155
