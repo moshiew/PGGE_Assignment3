@@ -1377,6 +1377,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soldier_Networked
       objectReference: {fileID: 0}
+    - target: {fileID: 6605589696886553466, guid: ef6e0f8488e4d774a84bf5428cb2debe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7387804286060631497, guid: ef6e0f8488e4d774a84bf5428cb2debe, type: 3}
       propertyPath: viewIdField
       value: 2
