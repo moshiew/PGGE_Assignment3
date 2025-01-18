@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6387816409353970726}
   - component: {fileID: 7387804286060631497}
   - component: {fileID: 8369935623077782508}
+  - component: {fileID: 4352188578341675306}
   m_Layer: 0
   m_Name: Soldier_Networked
   m_TagString: Untagged
@@ -82,6 +83,19 @@ MonoBehaviour:
   mRotationSpeed: 50
   mFollowCameraForward: 0
   mTurnRate: 10
+  audioSource: {fileID: 4352188578341675306}
+  concreteClips:
+  - {fileID: 8300000, guid: 879b6f486ac089f499189088625009cd, type: 3}
+  - {fileID: 8300000, guid: 69992d4bcac6b6f44a41b6e384331fd6, type: 3}
+  - {fileID: 8300000, guid: 02a53e382acf47c4c8a5953baa9ebf89, type: 3}
+  - {fileID: 8300000, guid: e469a8bb2a1383d43ab4104db2b469f9, type: 3}
+  jumpSfx: {fileID: 8300000, guid: e1020d0d62a18214cbffe432de3d0755, type: 3}
+  groanSFX: {fileID: 8300000, guid: 1d97f5633cefdb04ca192352fe53adfc, type: 3}
+  stepRate: 0.65
+  nextStepRate: 0.35
+  isMoving: 0
+  isDamaged: 0
+  isDancing: 0
   mGravity: -30
   mJumpHeight: 1
 --- !u!114 &6387816409353970726
@@ -138,6 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mAnimator: {fileID: 8539126780571647185}
   mPlayerMovement: {fileID: 1917308406274018615}
+  audioSource: {fileID: 4352188578341675306}
+  fireSFX: {fileID: 8300000, guid: 5325cb8f6bcfaac4d8d9cbaf260f0194, type: 3}
   mMaxAmunitionBeforeReload: 40
   mAmunitionCount: 100
   mBulletsInMagazine: 40
@@ -151,6 +167,102 @@ MonoBehaviour:
   mBulletPrefab: {fileID: 1794198430189847228, guid: d8d3ec337bac0704cbfca3cb3fdcb904, type: 3}
   mBulletSpeed: 10
   RoundsPerSecond: 000000000000000000000000
+--- !u!82 &4352188578341675306
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6605589696886553466}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6752708669405791927
 GameObject:
   m_ObjectHideFlags: 0

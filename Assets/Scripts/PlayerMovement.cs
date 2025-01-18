@@ -14,6 +14,17 @@ public class PlayerMovement : MonoBehaviour
     public bool mFollowCameraForward = false;
     public float mTurnRate = 10.0f;
 
+    public AudioSource audioSource;
+    public AudioClip[] concreteClips;
+    public AudioClip jumpSfx;
+    public AudioClip groanSFX;
+    public float stepRate = 0.65f;
+    public float nextStepRate = 0.35f;
+    public bool isMoving;
+    public bool isDamaged;
+    public bool isDancing = false;
+    private string currentGroundTag = "Ground";
+
 #if UNITY_ANDROID
     public FixedJoystick mJoystick;
 #endif
@@ -61,6 +72,11 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             speed = mWalkSpeed * 2.0f;
+            stepRate = 0.4f;
+        }
+        else
+        {
+            stepRate = 0.65f;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -77,6 +93,13 @@ public class PlayerMovement : MonoBehaviour
         {
             crouch = !crouch;
             Crouch();
+        }
+        isMoving = (vInput != 0);
+
+        if (isMoving && Time.time >= nextStepRate)
+        {
+            PlayGroundSound();
+            nextStepRate = Time.time + stepRate;
         }
     }
 
@@ -117,6 +140,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
+        audioSource.PlayOneShot(jumpSfx);
+        audioSource.PlayOneShot(groanSFX);
+        audioSource.volume = 0.1f;
         mAnimator.SetTrigger("Jump");
         mVelocity.y += Mathf.Sqrt(mJumpHeight * -2f * mGravity);
     }
@@ -149,5 +175,33 @@ public class PlayerMovement : MonoBehaviour
         mCharacterController.Move(mVelocity * Time.deltaTime);
         if (mCharacterController.isGrounded && mVelocity.y < 0)
             mVelocity.y = 0f;
+    }
+
+    void PlayGroundSound()
+    {
+        if (!audioSource || concreteClips.Length == 0) return;
+
+        AudioClip stepClip = null;
+
+        switch (currentGroundTag)
+        {
+            case "Concrete":
+                stepClip = concreteClips[Random.Range(0, concreteClips.Length)];
+                Debug.Log(currentGroundTag);
+                break;
+        }
+
+        if (stepClip != null)
+        {
+            audioSource.pitch = Random.Range(0.9f, 1.1f);
+            audioSource.volume = Random.Range(0.5f, 0.8f);
+            audioSource.PlayOneShot(stepClip);
+        }
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        // Update ground tag on collision
+        currentGroundTag = hit.collider.tag;
     }
 }

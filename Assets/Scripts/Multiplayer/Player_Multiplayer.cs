@@ -12,6 +12,8 @@ public class Player_Multiplayer : MonoBehaviour
     public FSM mFsm = new FSM();
     public Animator mAnimator;
     public PlayerMovement mPlayerMovement;
+    public AudioSource audioSource;
+    public AudioClip fireSFX;
 
     // This is the maximum number of bullets that the player 
     // needs to fire before reloading.
@@ -210,6 +212,7 @@ public class Player_Multiplayer : MonoBehaviour
             Quaternion.LookRotation(dir) * Quaternion.AngleAxis(90.0f, Vector3.right));
 
         bullet.GetComponent<Rigidbody>().AddForce(dir * mBulletSpeed, ForceMode.Impulse);
+        audioSource.PlayOneShot(fireSFX);
     }
 
     IEnumerator Coroutine_Firing(int id)
