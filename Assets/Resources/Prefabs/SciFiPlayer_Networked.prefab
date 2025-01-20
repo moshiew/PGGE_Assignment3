@@ -889,6 +889,15 @@ MonoBehaviour:
   mRotationSpeed: 50
   mFollowCameraForward: 0
   mTurnRate: 500
+  audioSource: {fileID: 0}
+  concreteClips: []
+  jumpSfx: {fileID: 0}
+  groanSFX: {fileID: 0}
+  stepRate: 0.65
+  nextStepRate: 0.35
+  isMoving: 0
+  isDamaged: 0
+  isDancing: 0
   mGravity: -30
   mJumpHeight: 1
 --- !u!114 &2028064569042939155
@@ -945,6 +954,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mAnimator: {fileID: 2028064569042939163}
   mPlayerMovement: {fileID: 2028064569042939162}
+  audioSource: {fileID: 0}
+  fireSFX: {fileID: 0}
   mMaxAmunitionBeforeReload: 40
   mAmunitionCount: 100
   mBulletsInMagazine: 40
