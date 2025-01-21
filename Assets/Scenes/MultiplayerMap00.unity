@@ -1375,7 +1375,8 @@ MonoBehaviour:
   - {fileID: 495266847}
   - {fileID: 537539015}
   mPlayerGameObject: {fileID: 0}
-  playerNamePrefab: {fileID: 4111768456658183521, guid: 28bfdad0caf067345943f72e5464d5bb, type: 3}
+  playerNamePrefab: {fileID: 7256142067650497577, guid: 0610943e66b1d8a458418d7582cd5d73, type: 3}
+  playerNameCanvas: {fileID: 8355357453057931808, guid: 0610943e66b1d8a458418d7582cd5d73, type: 3}
 --- !u!4 &1045152658
 Transform:
   m_ObjectHideFlags: 0

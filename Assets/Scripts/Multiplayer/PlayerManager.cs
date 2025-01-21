@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,15 +18,15 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     [HideInInspector]
     public GameObject mPlayerGameObject;
-    public GameObject playerNamePrefab;
-    public GameObject playerNameObject;
+
     [HideInInspector]
     private ThirdPersonCamera mThirdPersonCamera;
+ 
 
     private void Start()
     {
         ShowCharacterSelectionUI();
-        
+
         /*int randomIndex = Random.Range(0, mPlayerPrefabs.Length);
         string mPlayerPrefabName = mPlayerPrefabs[randomIndex].name;
 
@@ -50,7 +51,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         for (int i = 0; i < characterButtons.Length; i++)
         {
             int index = i; // Local copy of the index for the button listener
-            characterButtons[i].onClick.AddListener(() => OnCharacterSelected(index));
+            characterButtons[i].onClick.AddListener(() => OnCharacterSelected(index));  
         }
     }
 
@@ -68,6 +69,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     // Instantiate the selected player prefab
     void InstantiatePlayer()
     {
+
         if (selectedCharacterIndex < 0 || selectedCharacterIndex >= mPlayerPrefabs.Length)
         {
             Debug.LogError("No character selected!");
@@ -86,40 +88,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         mThirdPersonCamera.mDamping = 20.0f;
         mThirdPersonCamera.mCameraType = CameraType.Follow_Track_Pos_Rot;
 
-        CreatePlayerName(mPlayerGameObject);
-        }
-
-
-    void CreatePlayerName(GameObject playerGameObject)
-    {
-        if(playerNamePrefab != null)
-        {
-            playerNameObject = PhotonNetwork.Instantiate("Prefabs/" + playerNamePrefab.name, playerGameObject.transform.position + Vector3.up * 2.75f, Quaternion.identity, 0);
-
-            // Set the name text for the player
-            TextMesh nameTextMesh = playerNameObject.GetComponent<TextMesh>();
-            if (nameTextMesh != null)
-            {
-                nameTextMesh.text = PhotonNetwork.NickName;
-            }
-
-            // Set the name prefab as a child of the player character so it follows them
-            playerNameObject.transform.SetParent(playerGameObject.transform);
-            playerNameObject.transform.localPosition = Vector3.up * 2.75f;
-
-            // Transfer ownership to the local player
-            PhotonView photonView = playerNameObject.GetComponent<PhotonView>();
-            if (photonView != null && !photonView.IsMine)
-            {
-                photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
-            }
-        }
-        else
-        {
-            Debug.LogError("Player name prefab not assigned!");
-        }
     }
-
     public void LeaveRoom()
     {
         Debug.LogFormat("LeaveRoom");
@@ -130,13 +99,5 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     {
         //Debug.LogFormat("OnLeftRoom()");
         SceneManager.LoadScene("Menu");
-    }
-
-    void Update()
-    {
-        if(mPlayerGameObject != null && playerNamePrefab != null)
-        {
-            playerNameObject.transform.position = mPlayerGameObject.transform.position + Vector3.up * 2.75f;
-        }
     }
 }

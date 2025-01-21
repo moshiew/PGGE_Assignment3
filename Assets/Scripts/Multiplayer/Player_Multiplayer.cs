@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PGGE.Patterns;
 using Photon.Pun;
+using TMPro;
 
 public class Player_Multiplayer : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Player_Multiplayer : MonoBehaviour
     public PlayerMovement mPlayerMovement;
     public AudioSource audioSource;
     public AudioClip fireSFX;
+    public TextMeshProUGUI playerNameText;
 
     // This is the maximum number of bullets that the player 
     // needs to fire before reloading.
@@ -48,6 +50,16 @@ public class Player_Multiplayer : MonoBehaviour
     void Start()
     {
         mPhotonView = GetComponent<PhotonView>();
+
+        // Dynamically set the player's name if the PhotonView is owned by the current player
+        if (mPhotonView.IsMine)
+        {
+            playerNameText.text = PhotonNetwork.NickName;  // Set the local player's name
+        }
+        else
+        {
+            playerNameText.text = mPhotonView.Owner.NickName;  // Set the remote player's name
+        }
 
         mFsm.Add(new PlayerState_Multiplayer_MOVEMENT(this));
         mFsm.Add(new PlayerState_Multiplayer_ATTACK(this));
