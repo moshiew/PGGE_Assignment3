@@ -25,33 +25,17 @@ public class PlayerManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        ShowCharacterSelectionUI();
-
-        /*int randomIndex = Random.Range(0, mPlayerPrefabs.Length);
-        string mPlayerPrefabName = mPlayerPrefabs[randomIndex].name;
-
-        Transform randomSpawnTransform = mSpawnPoints.GetSpawnPoint();
-        mPlayerGameObject = PhotonNetwork.Instantiate("Prefabs/" + mPlayerPrefabName,
-            randomSpawnTransform.position,
-            randomSpawnTransform.rotation,
-            0);
-
-        mThirdPersonCamera = Camera.main.gameObject.AddComponent<ThirdPersonCamera>();
-
-        //mPlayerGameObject.GetComponent<PlayerMovement>().mFollowCameraForward = false;
-        mThirdPersonCamera.mPlayer = mPlayerGameObject.transform;
-        mThirdPersonCamera.mDamping = 20.0f;
-        mThirdPersonCamera.mCameraType = CameraType.Follow_Track_Pos_Rot;*/
+        ShowCharacterSelectionUI(); // Call to function
     }
     void ShowCharacterSelectionUI()
     {
-        characterSelectionPanel.SetActive(true);
+        characterSelectionPanel.SetActive(true); // Display selection UI panel
 
         // Add listener for each button to select the corresponding character
         for (int i = 0; i < characterButtons.Length; i++)
         {
             int index = i; // Local copy of the index for the button listener
-            characterButtons[i].onClick.AddListener(() => OnCharacterSelected(index));  
+            characterButtons[i].onClick.AddListener(() => OnCharacterSelected(index)); // To identify which button is clicked
         }
     }
 
@@ -76,8 +60,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             return;
         }
 
-        string mPlayerPrefabName = mPlayerPrefabs[selectedCharacterIndex].name;
+        string mPlayerPrefabName = mPlayerPrefabs[selectedCharacterIndex].name; // Retrieves the name of prefab
         Transform randomSpawnTransform = mSpawnPoints.GetSpawnPoint();
+        // Instantiate through file path Resources/Prefabs/Soldier_Networked or SciFiPlayer_Networked
         mPlayerGameObject = PhotonNetwork.Instantiate("Prefabs/" + mPlayerPrefabName,
             randomSpawnTransform.position,
             randomSpawnTransform.rotation,
@@ -87,7 +72,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         mThirdPersonCamera.mPlayer = mPlayerGameObject.transform;
         mThirdPersonCamera.mDamping = 20.0f;
         mThirdPersonCamera.mCameraType = CameraType.Follow_Track_Pos_Rot;
-
     }
     public void LeaveRoom()
     {

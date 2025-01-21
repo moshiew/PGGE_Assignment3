@@ -17,6 +17,11 @@ public class Player_Multiplayer : MonoBehaviour
     public AudioClip fireSFX;
     public TextMeshProUGUI playerNameText;
 
+    public int maxHealth = 100;
+    public int currentHealth;
+
+    public HealthBar healthBar;
+
     // This is the maximum number of bullets that the player 
     // needs to fire before reloading.
     public int mMaxAmunitionBeforeReload = 40;
@@ -50,16 +55,10 @@ public class Player_Multiplayer : MonoBehaviour
     void Start()
     {
         mPhotonView = GetComponent<PhotonView>();
+        playerNameText.text = mPhotonView.Owner.NickName; // Set the text to player input name
 
-        // Dynamically set the player's name if the PhotonView is owned by the current player
-        if (mPhotonView.IsMine)
-        {
-            playerNameText.text = PhotonNetwork.NickName;  // Set the local player's name
-        }
-        else
-        {
-            playerNameText.text = mPhotonView.Owner.NickName;  // Set the remote player's name
-        }
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
 
         mFsm.Add(new PlayerState_Multiplayer_MOVEMENT(this));
         mFsm.Add(new PlayerState_Multiplayer_ATTACK(this));
@@ -109,6 +108,11 @@ public class Player_Multiplayer : MonoBehaviour
         else
         {
             mAttackButtons[2] = false;
+        }
+
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            TakeDamage(10);
         }
     }
 
@@ -234,5 +238,22 @@ public class Player_Multiplayer : MonoBehaviour
         yield return new WaitForSeconds(1.0f / RoundsPerSecond[id]);
         mFiring[id] = false;
         mBulletsInMagazine -= 1;
+    }
+
+    void TakeDamage(int damage)
+    {
+        if (!mPhotonView.IsMine) return;
+
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+
+        mPhotonView.RPC("SyncHealth", RpcTarget.Others, currentHealth); // Using Photon RPC to broadcast and update health of other players in the same room
+    }
+
+    [PunRPC]
+    public void SyncHealth(int syncedHealth)
+    {
+        currentHealth = syncedHealth;
+        healthBar.SetHealth(currentHealth);
     }
 }

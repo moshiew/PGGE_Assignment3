@@ -958,6 +958,9 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   fireSFX: {fileID: 0}
   playerNameText: {fileID: 677196507588242267}
+  maxHealth: 100
+  currentHealth: 0
+  healthBar: {fileID: 6324285737923983656}
   mMaxAmunitionBeforeReload: 40
   mAmunitionCount: 100
   mBulletsInMagazine: 40
@@ -3213,9 +3216,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3689904699492823513, guid: 0610943e66b1d8a458418d7582cd5d73, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.123
+      objectReference: {fileID: 0}
+    - target: {fileID: 4517415749877797566, guid: 0610943e66b1d8a458418d7582cd5d73, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 7256142067650497577, guid: 0610943e66b1d8a458418d7582cd5d73, type: 3}
       propertyPath: m_Name
       value: PlayerNameDisplay
+      objectReference: {fileID: 0}
+    - target: {fileID: 8984870632989102024, guid: 0610943e66b1d8a458418d7582cd5d73, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8984870632989102024, guid: 0610943e66b1d8a458418d7582cd5d73, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3238,3 +3257,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1001949725105680505, guid: 0610943e66b1d8a458418d7582cd5d73, type: 3}
   m_PrefabInstance: {fileID: 2782756251937044013}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6324285737923983656 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8167900584002932485, guid: 0610943e66b1d8a458418d7582cd5d73, type: 3}
+  m_PrefabInstance: {fileID: 2782756251937044013}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 053b49db2201e0e4d86c1ccd8c6931e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

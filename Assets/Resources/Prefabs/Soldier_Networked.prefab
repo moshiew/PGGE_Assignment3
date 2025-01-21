@@ -155,6 +155,9 @@ MonoBehaviour:
   audioSource: {fileID: 4352188578341675306}
   fireSFX: {fileID: 8300000, guid: 5325cb8f6bcfaac4d8d9cbaf260f0194, type: 3}
   playerNameText: {fileID: 4766010041891636556}
+  maxHealth: 100
+  currentHealth: 0
+  healthBar: {fileID: 2055266628660942655}
   mMaxAmunitionBeforeReload: 40
   mAmunitionCount: 100
   mBulletsInMagazine: 40
@@ -449,11 +452,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerNameDisplay
       objectReference: {fileID: 0}
+    - target: {fileID: 8984870632989102024, guid: 0610943e66b1d8a458418d7582cd5d73, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8984870632989102024, guid: 0610943e66b1d8a458418d7582cd5d73, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0610943e66b1d8a458418d7582cd5d73, type: 3}
+--- !u!114 &2055266628660942655 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8167900584002932485, guid: 0610943e66b1d8a458418d7582cd5d73, type: 3}
+  m_PrefabInstance: {fileID: 7917310906231396410}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 053b49db2201e0e4d86c1ccd8c6931e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4766010041891636556 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3457555824004226422, guid: 0610943e66b1d8a458418d7582cd5d73, type: 3}
