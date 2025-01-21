@@ -18,6 +18,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     [HideInInspector]
     public GameObject mPlayerGameObject;
     public GameObject playerNamePrefab;
+    public GameObject playerNameObject;
     [HideInInspector]
     private ThirdPersonCamera mThirdPersonCamera;
 
@@ -85,20 +86,37 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         mThirdPersonCamera.mDamping = 20.0f;
         mThirdPersonCamera.mCameraType = CameraType.Follow_Track_Pos_Rot;
 
+        CreatePlayerName(mPlayerGameObject);
+        }
+
+
+    void CreatePlayerName(GameObject playerGameObject)
+    {
         if(playerNamePrefab != null)
         {
-            GameObject playerNameObject = PhotonNetwork.Instantiate("Prefabs/" + playerNamePrefab.name, mPlayerGameObject.transform.position + Vector3.up * 2.75f, Quaternion.identity, 0);
+            playerNameObject = PhotonNetwork.Instantiate("Prefabs/" + playerNamePrefab.name, playerGameObject.transform.position + Vector3.up * 2.75f, Quaternion.identity, 0);
 
+            // Set the name text for the player
             TextMesh nameTextMesh = playerNameObject.GetComponent<TextMesh>();
-            if(nameTextMesh != null)
+            if (nameTextMesh != null)
             {
                 nameTextMesh.text = PhotonNetwork.NickName;
             }
-            playerNameObject.transform.SetParent(mPlayerGameObject.transform);
+
+            // Set the name prefab as a child of the player character so it follows them
+            playerNameObject.transform.SetParent(playerGameObject.transform);
+            playerNameObject.transform.localPosition = Vector3.up * 2.75f;
+
+            // Transfer ownership to the local player
+            PhotonView photonView = playerNameObject.GetComponent<PhotonView>();
+            if (photonView != null && !photonView.IsMine)
+            {
+                photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
+            }
         }
         else
         {
-            Debug.Log("Player Name prefab not assigned");
+            Debug.LogError("Player name prefab not assigned!");
         }
     }
 
@@ -114,4 +132,11 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("Menu");
     }
 
+    void Update()
+    {
+        if(mPlayerGameObject != null && playerNamePrefab != null)
+        {
+            playerNameObject.transform.position = mPlayerGameObject.transform.position + Vector3.up * 2.75f;
+        }
+    }
 }
